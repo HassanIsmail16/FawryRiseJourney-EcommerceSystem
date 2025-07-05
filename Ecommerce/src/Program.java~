@@ -1,0 +1,109 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Program {
+    private StockService stockService;
+    private CartService cartService;
+    private final Scanner scanner = new Scanner(System.in);
+
+    public void displayMainMenu() {
+        System.out.println("============ Ecommerce System ============");
+        System.out.println("Choose an option:");
+        System.out.println("1. Manage Cart");
+        System.out.println("2. Manage Stock");
+        System.out.println("3. Exit");
+
+        int option = scanner.nextInt();
+
+        switch (option) {
+            case 1:
+//                cartservice.manageCart();
+                break;
+            case 2:
+                displayStockManagementMenu();
+                break;
+            case 3:
+                System.out.println("Exiting system...");
+                return;
+            default:
+                System.out.println("Invalid option. Please try again.");
+        }
+    }
+
+    public void displayStockManagementMenu() {
+        System.out.println("============ Stock Management ============");
+        System.out.println("Choose an option:");
+        System.out.println("1. Add product");
+        System.out.println("2. Remove product");
+        System.out.println("3. Update product");
+        System.out.println("4. Display stock");
+        System.out.println("5. Return to main menu");
+
+        int option = scanner.nextInt();
+
+        switch (option) {
+            case 1:
+                try {
+                    displayProductAdditionPrompt();
+                } catch(ParseException e) {
+                    System.out.println("Failed to add product. Please try again.");
+                }
+                break;
+            case 2:
+//                displayProductRemovalPrompt();
+                break;
+            case 3:
+//                displayProductUpdatePrompt();
+                break;
+            case 4:
+//                displayStock();
+                break;
+            case 5:
+                displayMainMenu();
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+    }
+
+    public void displayProductAdditionPrompt() throws ParseException {
+        System.out.println("============ Add Product ============");
+        System.out.println("Enter product name:");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+
+        System.out.println("Enter product price:");
+        double price = scanner.nextDouble();
+
+        System.out.println("Enter product quantity:");
+        int quantity = scanner.nextInt();
+
+        System.out.println("Does product have an expiration date? (y/n):");
+        boolean hasExpirationDate = scanner.next().equalsIgnoreCase("y");
+
+        Date expirationDate = null;
+        if (hasExpirationDate) {
+            System.out.println("Enter product expiration date (yyyy-MM-dd):");
+            scanner.nextLine();
+            String expirationDateString = scanner.nextLine();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            expirationDate = formatter.parse(expirationDateString);
+        }
+
+        System.out.println("Is product shippable? (y/n):");
+        boolean isShippable = scanner.next().equalsIgnoreCase("y");
+
+        Double weight = null;
+        if (isShippable) {
+            System.out.println("Enter product weight in kg:");
+            weight = scanner.nextDouble();
+        }
+
+        Product product = new Product(name, price, quantity, expirationDate, weight);
+        System.out.printf("Product %s added to stock.\n", product.getName());
+    }
+
+}
