@@ -34,6 +34,8 @@ replay_pid*
 *.iml
 *.ipr
 out/
+*.java~
+*~
 
 ## Eclipse
 .metadata
