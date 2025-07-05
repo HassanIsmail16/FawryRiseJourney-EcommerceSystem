@@ -4,7 +4,7 @@ This is my solution to the e-commerce system assessment task for Fawry Rise Jour
 ## Project overview
 This is an e-commerce system. 
 You can add products with a name, price, and quantity. You can also add products with an expiration date, a weight for shipping, or both.
-The system is extensible, you can add new types of products easily based.
+The system is extensible; you can add new types of products easily.
 A customer can add products to their cart and proceed to checkout.
 The system will print a checkout receipt with a shipment notice and will make sure everything is valid then process payment.
 
